@@ -1,0 +1,137 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class ArrayImplementation {
+
+    static int insertArray(int arr[], int pos, int val, int index) {
+        if (pos >= arr.length || pos < 0) {
+            System.out.println("Position not found!");
+            return index;
+        }
+
+        if (index >= arr.length) {
+            System.out.println("Array is full!");
+            return index;
+        }
+
+        for (int i = index; i >= pos && i > 0; i--) {
+            arr[i] = arr[i - 1];
+        }
+
+        arr[pos - 1] = val;
+
+        if (index < arr.length)
+            index++;
+
+        return index;
+    }
+
+    static int deleteElement(int arr[], int val, int index) {
+        Arrays.sort(arr);
+
+        int i = Arrays.binarySearch(arr, val);
+
+        for( ; i<index-1; i++) {
+            arr[i] = arr[i+1];
+        } 
+
+        i--;
+
+        return index;
+    }
+
+    static void showArray(int arr[])
+    {
+        System.out.println("Array elements are : ");
+        for(int i=0; i<arr.length; i++) {
+            System.out.print(arr[i]);
+            System.out.println(" ");
+        }
+        System.out.println();
+    }
+
+    static void sortedArray(int arr[]) {
+        Arrays.sort(arr);
+
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            System.out.print(" ");
+        }
+    }
+
+    static void search(int arr[], int key) {
+
+        Arrays.sort(arr);
+        int index =  Arrays.binarySearch(arr, key);
+        if(index < 0)
+        System.out.println("Element is not present in the Array");
+        else
+        System.out.println("Element is present at index : " +index);
+    }
+
+    public static void main(String args[]) {
+
+        int n, val, pos;
+        int index=0;
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the size of array : ");
+        n = sc.nextInt();
+
+        int arr[] = new int[n];
+
+        System.out.println("Enter the elements in the array : ");
+        for(int i=0; i<n; i++)
+        arr[i]=sc.nextInt();
+
+        System.out.println("Enter 1 to insert element in array : ");
+        System.out.println("Enter 2 to delete  element in array : ");
+        System.out.println("Enter 3 to sort the array : ");
+        System.out.println("Enter 4 to serach an element in an array ");
+
+        int ch = sc.nextInt();
+
+        switch (ch) {
+            case 1: {
+                System.out.println("Enter the value to insert : ");
+                val = sc.nextInt();
+
+                System.out.println("Enter the position to insert : ");
+                pos = sc.nextInt();
+
+                index=insertArray(arr, pos, val, index);
+
+                 showArray(arr);
+                break;
+            
+            }
+
+            case 2: {
+                System.out.println("Enter the value to delete : ");
+                val = sc.nextInt();
+
+                System.out.println(deleteElement(arr, val, index)); 
+               // showArray(arr);
+                break;
+            }
+
+            case 3: {
+
+                System.out.println("Sorted array: ");
+                sortedArray(arr);
+                break;
+            }
+
+            case 4: {
+                System.out.println("Enter the element to search for : ");
+                int key = sc.nextInt();
+
+                search(arr, key);
+                break;
+            }
+
+            default:
+                System.out.println("Invalid Choice!!");
+        }
+    }
+}
