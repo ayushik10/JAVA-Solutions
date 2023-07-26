@@ -1,4 +1,4 @@
-//REMOVE TRAILING ZEROES FROM A STRING
+// 2710. REMOVE TRAILING ZEROES FROM A STRING
 
 class Solution {
     public String removeTrailingZeros(String num) {
